@@ -1,0 +1,55 @@
+{% extends 'recommend/base.html'%}
+{% block body %}
+
+{% if not request.user.is_authenticated %}
+    <br>
+{% else %}
+    <center style="color:#fff"><h2 style="font: bold;font-weight: 700;">Welcome {{user.username}}!!</h2></center>
+{% endif %}
+
+<div class="container" >
+    <div class="col-xs-6 col-xs-offset-3">
+    	<form class="form-horizontal" role="search" method="get" action=''>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control input-lg " name="q" value="{{ request.GET.q }}" placeholder= "Search Movies "/>
+                    <span class='input-group-btn'>
+                        <button class='button1' type='submit'>Search</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+ </div>
+
+
+<p style="text-align:left;">
+    <span style="float:right;">
+        <a href="{% url 'recommend' %}" class="btn"><button style="color:white;background-color:rgb(3, 3, 77);padding:10px; border-radius: 5pt; outline: hidden;border: 0pt;">Get Movie Recommendation</button></a>
+    <h2 style="color:white;">Movies</h2>
+    </span>
+</p>
+<hr>
+<br>
+
+<!-- Movie list -->
+    <div class="row" style="margin: auto;" >
+            {% if movies %}
+            {% for movie in movies %}
+                <div class="col-lg-2 col-md-4 col-sm-6 " style="margin: auto; height: 250px;">
+                    <div class="thumbnail" style="border-radius: 22px 22px 22px 22px;">
+                        <center><h5>{{movie.title}}</h5></center>
+                        <a href="{% url 'detail' movie.id %}">
+                         
+                            <img  src="https://image.tmdb.org/t/p/w500/{{movie.images}}"  style="border-radius: 22px 22px 22px 22px; height: 170px;">
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+        </div>
+
+</div>
+
+
+{% endblock %}

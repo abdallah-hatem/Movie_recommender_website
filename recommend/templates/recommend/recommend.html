@@ -1,0 +1,34 @@
+{% extends 'recommend/base.html'%}
+{% block title %}Recommendations{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+	<h2 style="color: wheat;">Your Recommendations</h2>
+</div>
+<hr>
+<br>
+
+	<div class="container-fluid" style="color: rgb(208, 255, 0);">
+
+    <!-- Movie list -->
+        {{warning}}
+    <div class="row">
+
+            {% if movie_list %}
+                {% for movie in movie_list %}
+                    <div class="col-sm-2 col-md-2 ">
+                        <div class="thumbnail" style="border-radius: 22px 22px 22px 22px;">
+                            <center><h4>{{movie.title}}  </h4></center>
+                          
+                            <a href="{% url 'detail' movie.id %}">
+                                <img  src="https://image.tmdb.org/t/p/w500/{{movie.images}}"  class="img-responsive" style="border-radius: 22px 22px 22px 22px; height: 170px;">
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+</div>
+
+{% endblock %}
